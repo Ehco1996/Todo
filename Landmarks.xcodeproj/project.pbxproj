@@ -11,6 +11,10 @@
 		EBD88B3325CA19130054A32F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD88B3225CA19130054A32F /* ContentView.swift */; };
 		EBD88B3525CA19150054A32F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBD88B3425CA19150054A32F /* Assets.xcassets */; };
 		EBD88B3825CA19150054A32F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBD88B3725CA19150054A32F /* Preview Assets.xcassets */; };
+		EBD88B4125CA24110054A32F /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD88B4025CA24110054A32F /* CircleImage.swift */; };
+		EBD88B4425CA25250054A32F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD88B4325CA25250054A32F /* MapView.swift */; };
+		EBD88B4725CB74690054A32F /* landmarkData.json in Resources */ = {isa = PBXBuildFile; fileRef = EBD88B4625CB74690054A32F /* landmarkData.json */; };
+		EBD88B4A25CB74BA0054A32F /* Landmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD88B4925CB74BA0054A32F /* Landmark.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,10 @@
 		EBD88B3425CA19150054A32F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBD88B3725CA19150054A32F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EBD88B3925CA19150054A32F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBD88B4025CA24110054A32F /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		EBD88B4325CA25250054A32F /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		EBD88B4625CB74690054A32F /* landmarkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = landmarkData.json; sourceTree = "<group>"; };
+		EBD88B4925CB74BA0054A32F /* Landmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landmark.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +60,11 @@
 		EBD88B2F25CA19130054A32F /* Landmarks */ = {
 			isa = PBXGroup;
 			children = (
+				EBD88B4925CB74BA0054A32F /* Landmark.swift */,
 				EBD88B3025CA19130054A32F /* LandmarksApp.swift */,
 				EBD88B3225CA19130054A32F /* ContentView.swift */,
+				EBD88B4025CA24110054A32F /* CircleImage.swift */,
+				EBD88B4325CA25250054A32F /* MapView.swift */,
 				EBD88B3425CA19150054A32F /* Assets.xcassets */,
 				EBD88B3925CA19150054A32F /* Info.plist */,
 				EBD88B3625CA19150054A32F /* Preview Content */,
@@ -64,6 +75,7 @@
 		EBD88B3625CA19150054A32F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				EBD88B4625CB74690054A32F /* landmarkData.json */,
 				EBD88B3725CA19150054A32F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -128,6 +140,7 @@
 			files = (
 				EBD88B3825CA19150054A32F /* Preview Assets.xcassets in Resources */,
 				EBD88B3525CA19150054A32F /* Assets.xcassets in Resources */,
+				EBD88B4725CB74690054A32F /* landmarkData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +152,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBD88B3325CA19130054A32F /* ContentView.swift in Sources */,
+				EBD88B4425CA25250054A32F /* MapView.swift in Sources */,
 				EBD88B3125CA19130054A32F /* LandmarksApp.swift in Sources */,
+				EBD88B4125CA24110054A32F /* CircleImage.swift in Sources */,
+				EBD88B4A25CB74BA0054A32F /* Landmark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
