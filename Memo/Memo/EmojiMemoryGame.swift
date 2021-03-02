@@ -16,19 +16,18 @@ class EmojiMemoryGame {
 
     // create model
     static func createMemoryGame() -> MemoryGame<String> {
-        let emojis: Array<String> = ["😁", "😜"]
+        let emojis: Array<String> = ["😁", "😜", "😇"]
         return MemoryGame<String>(numberOfPairsOfCards: emojis.count) { idx in
             return emojis[idx]
         }
     }
 
-// MARK: - Access to the Model
+    // MARK: - Access to the Model
     var cards: Array<MemoryGame<String>.Card> {
         return model.cards
     }
 
-// MARK: - Intent(s)
-
+    // MARK: - Intent(s)
     func choose(card: MemoryGame<String>.Card) {
         model.choose(card: card)
     }

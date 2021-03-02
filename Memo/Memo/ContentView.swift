@@ -15,7 +15,9 @@ struct ContentView: View {
     var body: some View {
         HStack { //HStack水平排列，不加HStack的话会显示出四个页面来
             ForEach(viewModel.cards) { card in
-                CardView(card: card)
+                CardView(card: card).onTapGesture {
+                    self.viewModel.choose(card: card)
+                }
             }
         }
             .padding() //卡片之间的间距，不设置是为了保持为标准间剧
