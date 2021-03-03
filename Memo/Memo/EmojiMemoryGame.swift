@@ -11,8 +11,9 @@ import SwiftUI
 
 
 // ViewModel
-class EmojiMemoryGame {
-    private var model: MemoryGame<String> = createMemoryGame()
+class EmojiMemoryGame: ObservableObject {
+    
+    @Published private var model: MemoryGame<String> = createMemoryGame()
 
     // create model
     static func createMemoryGame() -> MemoryGame<String> {
