@@ -12,16 +12,15 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
 
     var body: some View {
-        HStack { //HStack水平排列，不加HStack的话会显示出四个页面来
-            ForEach(viewModel.cards) { card in
-                CardView(card: card).onTapGesture {
-                    self.viewModel.choose(card: card)
-                }
-            }
-        }.padding() //卡片之间的间距，不设置是为了保持为标准间剧
+        Grid(self.viewModel.cards) { card in
+            CardView(card: card).onTapGesture {
+                self.viewModel.choose(card: card)
+            }.padding() //卡片之间的间距
+        }.padding() // 和屏幕的间距
         .foregroundColor(Color.orange) //属性可以被覆盖
     }
 }
+
 
 struct CardView: View {
     var card: MemoryGame<String>.Card
@@ -42,7 +41,7 @@ struct CardView: View {
                 //会自动匹配上面的foregroundColor(Color.orange)
                 RoundedRectangle(cornerRadius: cornerRadius).fill()
             }
-        }.font(Font.system(size:fontSize(for: size)))
+        }.font(Font.system(size: fontSize(for: size)))
     }
 
     func fontSize(for size: CGSize) -> CGFloat {
