@@ -38,8 +38,10 @@ struct CardView: View {
                 RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
                 Text(card.content)
             } else {
-                //会自动匹配上面的foregroundColor(Color.orange)
-                RoundedRectangle(cornerRadius: cornerRadius).fill()
+                if !card.isMatched {
+                    //会自动匹配上面的foregroundColor(Color.orange)
+                    RoundedRectangle(cornerRadius: cornerRadius).fill()
+                }
             }
         }.font(Font.system(size: fontSize(for: size)))
     }
