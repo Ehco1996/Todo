@@ -15,7 +15,7 @@ struct EmojiMemoryGameView: View {
         Grid(self.viewModel.cards) { card in
             CardView(card: card).onTapGesture {
                 self.viewModel.choose(card: card)
-            }.padding() //卡片之间的间距
+            }.padding(5) //卡片之间的间距
         }.padding() // 和屏幕的间距
         .foregroundColor(Color.orange) //属性可以被覆盖
     }
@@ -31,30 +31,24 @@ struct CardView: View {
         }
     }
 
-    func body(for size: CGSize) -> some View {
-        ZStack { //本质上是一张卡片
-            if card.isFaceUp {
-                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
-                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
+    @ViewBuilder
+    private func body(for size: CGSize) -> some View {
+        if self.card.isFaceUp || !self.card.isMatched {
+            ZStack {
+                Pie(startAngle: Angle.degrees(0 - 90), endAngle: Angle.degrees(110 - 90), clockkwise: true)
                 Text(card.content)
-            } else {
-                if !card.isMatched {
-                    //会自动匹配上面的foregroundColor(Color.orange)
-                    RoundedRectangle(cornerRadius: cornerRadius).fill()
-                }
+                    .font(Font.system(size: fontSize(for: size)))
             }
-        }.font(Font.system(size: fontSize(for: size)))
-    }
-
-    func fontSize(for size: CGSize) -> CGFloat {
-        return min(size.width, size.height) * fontScaleFactor
+                .cardify(isFaceUp: card.isFaceUp)
+        }
     }
 
 
     // MARK: - Drawing Constants
-    let cornerRadius: CGFloat = 10.0
-    let edgeLineWidth: CGFloat = 3
-    let fontScaleFactor: CGFloat = 0.75
+    func fontSize(for size: CGSize) -> CGFloat {
+        return min(size.width, size.height) * fontScaleFactor
+    }
+    private let fontScaleFactor: CGFloat = 0.7
 
 }
 

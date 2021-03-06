@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct GridLayout {
-    var size: CGSize
-    var rowCount: Int = 0
-    var columnCount: Int = 0
+    private(set) var size: CGSize
+    private(set) var rowCount: Int = 0
+    private(set) var columnCount: Int = 0
 
     //创建grid layout,就是根据数量和长宽比例算出一共有多少行，每行有多少个元素
     init(itemCount: Int, nearAspectRatio desiredAspectRatio: Double = 1, in size: CGSize) {

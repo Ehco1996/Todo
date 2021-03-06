@@ -9,10 +9,10 @@ import Foundation
 
 // Model
 struct MemoryGame<CardContent> where CardContent: Equatable {
-    var cards: Array<Card>
+    private(set) var cards: Array<Card>
 
     // 当前面向上方的卡idx
-    var indexOfTheOneOnlyFacedUpCard: Int? {
+    private var indexOfTheOneOnlyFacedUpCard: Int? {
         get { cards.indices.filter { idx in cards[idx].isFaceUp }.only }
         // 每次设置时，将所有其他card反过来
         set(newIdx) {
