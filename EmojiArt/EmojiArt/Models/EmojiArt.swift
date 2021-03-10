@@ -8,12 +8,12 @@
 import Foundation
 
 
-struct EmojiArt {
+struct EmojiArt: Codable {
     var backgroudURL: URL?
 
     var emojis = [Emoji]()
 
-    struct Emoji: Identifiable {
+    struct Emoji: Identifiable, Codable {
         let text: String
         var x: Int
         var y: Int
@@ -36,4 +36,21 @@ struct EmojiArt {
         self.emojis.append(Emoji(text: text, x: x, y: y, size: size, id: uniqueId))
     }
 
+
+    var json: Data? {
+        return try? JSONEncoder().encode(self)
+    }
+
+
+    // free init 用户手动传所有参数，或者全部用默认值
+    init() { }
+
+    // 带个？表示这个init可能会失败，太吊了
+    init?(json: Data?) {
+        if json != nil, let new = try?JSONDecoder().decode(EmojiArt.self, from: json!) {
+            self = new
+        } else {
+
+        }
+    }
 }
