@@ -12,8 +12,6 @@ struct EmojiArtDocumentView: View {
     private let defaultEmojiSize: CGFloat = 40
 
     @ObservedObject var document: EmojiArtDocument
-    @State private var zoomScale: CGFloat = 1.0
-
 
     var body: some View {
         VStack {
@@ -28,22 +26,26 @@ struct EmojiArtDocumentView: View {
                     }
                 }
             }.padding(.horizontal)
+
             GeometryReader { geometry in
                 ZStack {
                     //绘制drop的image
                     Color.white.overlay(
                         OptionalImage(uiImage: self.document.backgroundImage)
                             .scaleEffect(self.zoomScale)
-                    ).gesture(self.doubleTapToZoom(in: geometry.size))
-
+                            .offset(self.panOffset)
+                    )
+                        .gesture(self.doubleTapToZoom(in: geometry.size))
                     // 绘制drop的emoji
                     ForEach(self.document.emojis) { emoji in
                         Text(emoji.text)
-                            .font(self.font(for: emoji))
+                            .font(animatableWithSize: emoji.fontSize * self.zoomScale)
                             .position(self.position(for: emoji, in: geometry.size))
                     }
                 }
                     .clipped()
+                    .gesture(self.panGesture())
+                    .gesture(zoomGesture())
                     .edgesIgnoringSafeArea([.horizontal, .bottom])
                     .onDrop(of: ["public.image", "public.text"], isTargeted: nil) { providers, location in
                     var location = geometry.convert(location, from: .global)
@@ -56,38 +58,79 @@ struct EmojiArtDocumentView: View {
     }
 
 
-    private func doubleTapToZoom(in size: CGSize) -> some Gesture {
-        TapGesture(count: 2)
-            .onEnded {
-            zoomToFit(self.document.backgroundImage, in: size)
-        }
-    }
-
     private func zoomToFit(_ image: UIImage?, in size: CGSize) {
         if let image = image, image.size.width > 0, image.size.height > 0 {
             let hZoom = size.width / image.size.width
             let yZoom = size.height / image.size.height
-            self.zoomScale = min(hZoom, yZoom)
+            self.steadyStatePanOffset = .zero
+            self.steadyStateZoomScale = min(hZoom, yZoom)
         }
     }
 
-    private func font(for emoji: EmojiArt.Emoji) -> Font {
-        Font.system(size: emoji.fontSize * self.zoomScale)
-    }
 
     private func position(for emoji: EmojiArt.Emoji, in size: CGSize) -> CGPoint {
         var location = emoji.location
         location = CGPoint(x: location.x * self.zoomScale, y: location.y * self.zoomScale)
         location = CGPoint(x: location.x + size.width / 2, y: location.y + size.height / 2)
+        location = CGPoint(x: location.x + self.panOffset.width, y: location.y + self.panOffset.height)
         return location
     }
 
+
+
+    // NOTE: 下面都是所有的手势
+
+    // 双击缩放
+    private func doubleTapToZoom(in size: CGSize) -> some Gesture {
+        TapGesture(count: 2)
+            .onEnded {
+            withAnimation {
+                zoomToFit(self.document.backgroundImage, in: size)
+            }
+        }
+    }
+
+
+    // 双指拖动缩放
+    @State private var steadyStateZoomScale: CGFloat = 1.0
+    @GestureState private var gestureZoomScale: CGFloat = 1.0 // 这个变量会随着手势的变化而变化，从而达到动态缩放的效果
+    var zoomScale: CGFloat { steadyStateZoomScale * gestureZoomScale }
+
+    private func zoomGesture() -> some Gesture {
+        MagnificationGesture()
+            .updating($gestureZoomScale) { latestGestureScale, ourGestrueScaleInOut, transition in
+            //ourGestrueScaleInOut这个变量会被手势动作传递回$gestureZoomScale
+            // 我们不应该直接修改gestureZoomScale这个变量，而是应该通过手势去做
+            ourGestrueScaleInOut = latestGestureScale
+        }
+            .onEnded { finalGestureScale in
+            self.steadyStateZoomScale *= finalGestureScale
+        }
+    }
+
+
+    //单指移动的gesture
+    @State private var steadyStatePanOffset: CGSize = .zero
+    @GestureState private var gesturePanOffset: CGSize = .zero
+    private var panOffset: CGSize { (steadyStatePanOffset + gesturePanOffset) * zoomScale }
+
+    private func panGesture() -> some Gesture {
+        DragGesture()
+            .updating($gesturePanOffset) { latestDragGestureValue, gesturePanOffsetInOut, transition in
+            gesturePanOffsetInOut = latestDragGestureValue.translation / self.zoomScale
+        }
+            .onEnded { finalDragGestureValue in
+            self.steadyStatePanOffset = self.steadyStatePanOffset + (finalDragGestureValue.translation / self.zoomScale)
+        }
+    }
+
+
+    // 拖拽手势
     private func drop(providers: [NSItemProvider], at location: CGPoint) -> Bool {
         var found = providers.loadFirstObject(ofType: URL.self) { url in
             print("drop \(url)")
             self.document.setBackgroudYURL(url)
         }
-
         if !found {
             found = providers.loadObjects(ofType: String.self) { string in
                 self.document.addEmoji(string, at: location, size: defaultEmojiSize)
@@ -99,9 +142,6 @@ struct EmojiArtDocumentView: View {
 
 
 }
-
-
-
 
 
 
