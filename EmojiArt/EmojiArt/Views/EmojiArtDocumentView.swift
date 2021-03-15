@@ -15,17 +15,22 @@ struct EmojiArtDocumentView: View {
 
     var body: some View {
         VStack {
-            ScrollView(.horizontal) {
-                HStack {
-                    //the map return an array of String
-                    //"\"是指key path，"."指this class of things string itself
-                    ForEach(EmojiArtDocument.palette.map { String($0) }, id: \.self) { emoji in
-                        Text(emoji)
-                            .font(Font.system(size: self.defaultEmojiSize))
-                            .onDrag { NSItemProvider(object: emoji as NSString) }
+
+            HStack {
+                PaletteChooser()
+
+                ScrollView(.horizontal) {
+                    HStack {
+                        //the map return an array of String
+                        //"\"是指key path，"."指this class of things string itself
+                        ForEach(EmojiArtDocument.palette.map { String($0) }, id: \.self) { emoji in
+                            Text(emoji)
+                                .font(Font.system(size: self.defaultEmojiSize))
+                                .onDrag { NSItemProvider(object: emoji as NSString) }
+                        }
                     }
                 }
-            }.padding(.horizontal)
+            }
 
             GeometryReader { geometry in
                 ZStack {
@@ -37,10 +42,14 @@ struct EmojiArtDocumentView: View {
                     )
                         .gesture(self.doubleTapToZoom(in: geometry.size))
                     // 绘制drop的emoji
-                    ForEach(self.document.emojis) { emoji in
-                        Text(emoji.text)
-                            .font(animatableWithSize: emoji.fontSize * self.zoomScale)
-                            .position(self.position(for: emoji, in: geometry.size))
+                    if self.isLoading {
+                        Image(systemName: "dpad").imageScale(.large).spinning()
+                    } else {
+                        ForEach(self.document.emojis) { emoji in
+                            Text(emoji.text)
+                                .font(animatableWithSize: emoji.fontSize * self.zoomScale)
+                                .position(self.position(for: emoji, in: geometry.size))
+                        }
                     }
                 }
                     .clipped()
@@ -55,6 +64,12 @@ struct EmojiArtDocumentView: View {
                 }
             }
         }
+    }
+
+
+    var isLoading: Bool {
+        document.backgroundURL != nil && document.backgroundImage == nil
+
     }
 
 
@@ -129,7 +144,7 @@ struct EmojiArtDocumentView: View {
     private func drop(providers: [NSItemProvider], at location: CGPoint) -> Bool {
         var found = providers.loadFirstObject(ofType: URL.self) { url in
             print("drop \(url)")
-            self.document.setBackgroudYURL(url)
+            self.document.backgroundURL = url
         }
         if !found {
             found = providers.loadObjects(ofType: String.self) { string in
