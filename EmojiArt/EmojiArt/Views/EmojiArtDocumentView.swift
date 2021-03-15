@@ -13,23 +13,25 @@ struct EmojiArtDocumentView: View {
 
     @ObservedObject var document: EmojiArtDocument
 
+    @State var chosenPalette: String = ""
+
     var body: some View {
         VStack {
 
             HStack {
-                PaletteChooser()
+                PaletteChooser(document: self.document, chosenPalette: $chosenPalette)
 
                 ScrollView(.horizontal) {
                     HStack {
                         //the map return an array of String
                         //"\"是指key path，"."指this class of things string itself
-                        ForEach(EmojiArtDocument.palette.map { String($0) }, id: \.self) { emoji in
+                        ForEach(chosenPalette.map { String($0) }, id: \.self) { emoji in
                             Text(emoji)
                                 .font(Font.system(size: self.defaultEmojiSize))
                                 .onDrag { NSItemProvider(object: emoji as NSString) }
                         }
                     }
-                }
+                }.onAppear { self.chosenPalette = self.document.defaultPalette }
             }
 
             GeometryReader { geometry in
