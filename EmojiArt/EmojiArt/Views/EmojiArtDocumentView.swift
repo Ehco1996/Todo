@@ -22,10 +22,8 @@ struct EmojiArtDocumentView: View {
 
     var body: some View {
         VStack {
-
             HStack {
                 PaletteChooser(document: self.document, chosenPalette: $chosenPalette)
-
                 ScrollView(.horizontal) {
                     HStack {
                         //the map return an array of String
@@ -159,14 +157,8 @@ struct EmojiArtDocumentView: View {
             }
         }
         return found
-
     }
-
-
 }
-
-
-
 
 
 struct ContentView_Previews: PreviewProvider {

@@ -8,7 +8,15 @@
 import SwiftUI
 import Combine
 
-class EmojiArtDocument: ObservableObject {
+class EmojiArtDocument: ObservableObject, Hashable, Identifiable, Equatable {
+    static func == (lhs: EmojiArtDocument, rhs: EmojiArtDocument) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    let id: UUID
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 
     static let palette: String = "🚗🚕🚙🚌🏎🚓"
 
@@ -18,11 +26,13 @@ class EmojiArtDocument: ObservableObject {
 
     private var autosaveCancallable: AnyCancellable?
 
-    init() {
+    init(id: UUID? = nil) {
+        self.id = id ?? UUID()
+        let defaultKey = "EmojiArtDocumentStore.\(self.id.uuidString)"
         emojiArt = EmojiArt(json: UserDefaults.standard.data(forKey: EmojiArtDocument.untitled)) ?? EmojiArt()
         autosaveCancallable = $emojiArt.sink { emojiArt in
             print("json=\(emojiArt.json?.utf8 ?? "nil")")
-            UserDefaults.standard.set(emojiArt.json, forKey: EmojiArtDocument.untitled)
+            UserDefaults.standard.set(emojiArt.json, forKey: defaultKey)
         }
         fetchBackgroudImageData()
     }
@@ -70,7 +80,7 @@ class EmojiArtDocument: ObservableObject {
             fetchImageCancellable?.cancel()// 防止并发，每次下载之前取消上一次的下载
             fetchImageCancellable = URLSession.shared.dataTaskPublisher(for: url)
                 .map { data, urlresponse in UIImage(data: data) } // publish the result
-                .receive(on: DispatchQueue.main)
+            .receive(on: DispatchQueue.main)
                 .replaceError(with: nil)
                 .assign(to: \.backgroundImage, on: self)
         }
