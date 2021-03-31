@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EB2D68E12612AE02000C1437 /* EmojiArtApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D68E02612AE02000C1437 /* EmojiArtApp.swift */; };
+		EB2D68E42613FF69000C1437 /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D68E32613FF69000C1437 /* EditableText.swift */; };
 		EB3820A225F5A362007A1F02 /* EmojiArtDocumentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3820A125F5A362007A1F02 /* EmojiArtDocumentStore.swift */; };
 		EB3820A425F5A362007A1F02 /* EmojiArtDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3820A325F5A362007A1F02 /* EmojiArtDocumentView.swift */; };
 		EB3820A625F5A364007A1F02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB3820A525F5A364007A1F02 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		EB2D68E02612AE02000C1437 /* EmojiArtApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiArtApp.swift; sourceTree = "<group>"; };
+		EB2D68E32613FF69000C1437 /* EditableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
 		EB38209E25F5A362007A1F02 /* EmojiArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB3820A125F5A362007A1F02 /* EmojiArtDocumentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmojiArtDocumentStore.swift; path = ../EmojiArtDocumentStore.swift; sourceTree = "<group>"; };
 		EB3820A325F5A362007A1F02 /* EmojiArtDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocumentView.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				EB79F0A225F5AEE3009E675D /* EmojiArtExtensions.swift */,
 				EB2D68E02612AE02000C1437 /* EmojiArtApp.swift */,
 				EBAA37CB25F9907E004E86AC /* AnimatableSystemFontModifier.swift */,
+				EB2D68E32613FF69000C1437 /* EditableText.swift */,
 				EB3820A525F5A364007A1F02 /* Assets.xcassets */,
 				EB3820AA25F5A364007A1F02 /* Info.plist */,
 				EB3820A725F5A364007A1F02 /* Preview Content */,
@@ -208,6 +211,7 @@
 				EB79F0A325F5AEE3009E675D /* EmojiArtExtensions.swift in Sources */,
 				EB3820A425F5A362007A1F02 /* EmojiArtDocumentView.swift in Sources */,
 				EB97675625FEE7410089D81F /* PaletteChooser.swift in Sources */,
+				EB2D68E42613FF69000C1437 /* EditableText.swift in Sources */,
 				EB2D68E12612AE02000C1437 /* EmojiArtApp.swift in Sources */,
 				EB3820A225F5A362007A1F02 /* EmojiArtDocumentStore.swift in Sources */,
 				EB3820B225F5A39A007A1F02 /* EmojiArtDocument.swift in Sources */,
