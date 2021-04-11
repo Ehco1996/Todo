@@ -20,7 +20,7 @@ class EmojiArtDocument: ObservableObject, Hashable, Identifiable, Equatable {
 
     static let palette: String = "🚗🚕🚙🚌🏎🚓"
 
-    static let untitled = "EmojiArtDocument.Untitled"
+    static let untitled = "EmojiArtDocument.Untitled1"
 
     @Published private var emojiArt: EmojiArt
 
