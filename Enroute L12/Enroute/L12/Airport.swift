@@ -10,9 +10,17 @@ import CoreData
 import Combine
 
 extension Airport: Comparable {
-    static func withICAO(_ icao: String, context: NSManagedObjectContext) -> Airport {
-        // look up icao in Core Data
+
+    static func fetchRequest(_ predicate: NSPredicate) -> NSFetchRequest<Airport> {
+        let request = NSFetchRequest<Airport>(entityName: "Airport")
+        request.sortDescriptors = [NSSortDescriptor(key: "location", ascending: true)]
+        request.predicate = predicate
+        return request
+    }
+
+    static func getOrCreateByIcao(_ icao: String, context: NSManagedObjectContext) -> Airport {
         let request = fetchRequest(NSPredicate(format: "icao_ = %@", icao))
+        request.fetchLimit = 1
         let airports = (try? context.fetch(request)) ?? []
         if let airport = airports.first {
             // if found, return it
@@ -51,7 +59,7 @@ extension Airport: Comparable {
 
     static func update(from info: AirportInfo, context: NSManagedObjectContext) {
         if let icao = info.icao {
-            let airport = self.withICAO(icao, context: context)
+            let airport = self.getOrCreateByIcao(icao, context: context)
             airport.latitude = info.latitude
             airport.longitude = info.longitude
             airport.name = info.name
@@ -64,12 +72,7 @@ extension Airport: Comparable {
         }
     }
 
-    static func fetchRequest(_ predicate: NSPredicate) -> NSFetchRequest<Airport> {
-        let request = NSFetchRequest<Airport>(entityName: "Airport")
-        request.sortDescriptors = [NSSortDescriptor(key: "location", ascending: true)]
-        request.predicate = predicate
-        return request
-    }
+
 
     var flightsTo: Set<Flight> {
         get { (flightsTo_ as? Set<Flight>) ?? [] }

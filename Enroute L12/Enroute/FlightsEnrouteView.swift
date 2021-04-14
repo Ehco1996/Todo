@@ -35,28 +35,28 @@ extension FlightSearch {
 
 struct FlightsEnrouteView: View {
     @Environment(\.managedObjectContext) var context
-    
+
     @State var flightSearch: FlightSearch
-    
+
     var body: some View {
         NavigationView {
             FlightList(flightSearch)
                 .navigationBarItems(leading: simulation, trailing: filter)
         }
     }
-    
+
     @State private var showFilter = false
-    
+
     var filter: some View {
         Button("Filter") {
             self.showFilter = true
         }
-        .sheet(isPresented: $showFilter) {
+            .sheet(isPresented: $showFilter) {
             FilterFlights(flightSearch: self.$flightSearch, isPresented: self.$showFilter)
                 .environment(\.managedObjectContext, self.context)
         }
     }
-    
+
     // if no FlightAware credentials exist in Info.plist
     // then we simulate data from KSFO and KLAS (Las Vegas, NV)
     // the simulation time must match the times in the simulation data
@@ -69,7 +69,7 @@ struct FlightsEnrouteView: View {
 
 struct FlightList: View {
     @FetchRequest var flights: FetchedResults<Flight>
-    
+
     init(_ flightSearch: FlightSearch) {
         let request = Flight.fetchRequest(flightSearch.predicate)
         _flights = FetchRequest(fetchRequest: request)
@@ -81,9 +81,9 @@ struct FlightList: View {
                 FlightListEntry(flight: flight)
             }
         }
-        .navigationBarTitle(title)
+            .navigationBarTitle(title)
     }
-    
+
     private var title: String {
         let title = "Flights"
         if let destination = flights.first?.destination.icao {
@@ -105,7 +105,7 @@ struct FlightListEntry: View {
         }
             .lineLimit(1)
     }
-    
+
     var name: String {
         return "\(flight.airline.friendlyName) \(flight.number)"
     }
