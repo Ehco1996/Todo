@@ -25,6 +25,7 @@
 		DAB658C92467A03800A0F2BB /* Airline.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB658C82467A03800A0F2BB /* Airline.swift */; };
 		DAB658CB2467A05800A0F2BB /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB658CA2467A05800A0F2BB /* Airport.swift */; };
 		DAB658CD2467A0BF00A0F2BB /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB658CC2467A0BF00A0F2BB /* Flight.swift */; };
+		EBFE11E72629084A00CDC874 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFE11E62629084A00CDC874 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		DAB658C82467A03800A0F2BB /* Airline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airline.swift; sourceTree = "<group>"; };
 		DAB658CA2467A05800A0F2BB /* Airport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airport.swift; sourceTree = "<group>"; };
 		DAB658CC2467A0BF00A0F2BB /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
+		EBFE11E62629084A00CDC874 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				DA47A9BC2469F34800C8E13C /* FilterFlights.swift */,
+				EBFE11E62629084A00CDC874 /* MapView.swift */,
 				DAB658AA2467944B00A0F2BB /* FlightsEnrouteView.swift */,
 				DAB658A72467944B00A0F2BB /* Enroute.xcdatamodeld */,
 				DAA4E825246C5F160072134C /* L12 */,
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAB658C92467A03800A0F2BB /* Airline.swift in Sources */,
+				EBFE11E72629084A00CDC874 /* MapView.swift in Sources */,
 				DAB658C6246794A800A0F2BB /* FlightAwareRequest.swift in Sources */,
 				DAB658C7246794A800A0F2BB /* FlightSimulationData.swift in Sources */,
 				DAB658A92467944B00A0F2BB /* Enroute.xcdatamodeld in Sources */,

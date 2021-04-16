@@ -24,6 +24,7 @@
 		EBB7DAB62612A00700E566B5 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB7DAB42612A00700E566B5 /* Grid.swift */; };
 		EBB7DAB72612A00700E566B5 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB7DAB52612A00700E566B5 /* GridLayout.swift */; };
 		EBB7DAC12612AC2500E566B5 /* EmojiArtDocumentChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB7DAC02612AC2500E566B5 /* EmojiArtDocumentChooser.swift */; };
+		EBFE11EA2629116600CDC874 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFE11E92629116600CDC874 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		EBB7DAB42612A00700E566B5 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grid.swift; path = ../../Memo/Memo/Layouts/Grid.swift; sourceTree = "<group>"; };
 		EBB7DAB52612A00700E566B5 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GridLayout.swift; path = ../../Memo/Memo/Layouts/GridLayout.swift; sourceTree = "<group>"; };
 		EBB7DAC02612AC2500E566B5 /* EmojiArtDocumentChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocumentChooser.swift; sourceTree = "<group>"; };
+		EBFE11E92629116600CDC874 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			children = (
 				EB97675525FEE7410089D81F /* PaletteChooser.swift */,
 				EB3820A325F5A362007A1F02 /* EmojiArtDocumentView.swift */,
+				EBFE11E92629116600CDC874 /* ImagePicker.swift */,
 				EBA3B9A225F84DE700666A67 /* OptionalImage.swift */,
 				EBB7DAC02612AC2500E566B5 /* EmojiArtDocumentChooser.swift */,
 			);
@@ -214,6 +217,7 @@
 				EB2D68E42613FF69000C1437 /* EditableText.swift in Sources */,
 				EB2D68E12612AE02000C1437 /* EmojiArtApp.swift in Sources */,
 				EB3820A225F5A362007A1F02 /* EmojiArtDocumentStore.swift in Sources */,
+				EBFE11EA2629116600CDC874 /* ImagePicker.swift in Sources */,
 				EB3820B225F5A39A007A1F02 /* EmojiArtDocument.swift in Sources */,
 				EBAA37D025FEDEB1004E86AC /* Spinning.swift in Sources */,
 			);
